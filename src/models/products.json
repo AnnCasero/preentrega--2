@@ -1,0 +1,54 @@
+[
+  {
+    "id": 2,
+    "title": "Stray kids NOEASY",
+    "description": "Stray kids album from 2021",
+    "price": 25,
+    "code": 3258,
+    "stock": 1000,
+    "status": true,
+    "thumbnails": [
+      "nexgen.jpg",
+      "nexgen2.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "BRING ME THE HORIZON - POST HUMAN: NeX GEn",
+    "description": "Bring me the horizon new album",
+    "price": 14,
+    "code": "27924",
+    "stock": 1000,
+    "status": true,
+    "thumbnails": [
+      "nexgen.jpg",
+      "nexgen2.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "BAD OMENS - THE DEATH OF PEACE OF MIND",
+    "description": "Bad Omens album, year: 2022",
+    "price": 12,
+    "code": "25222",
+    "stock": 700,
+    "status": true,
+    "thumbnails": [
+      "TheDeathOfPieceOfMind.jpg",
+      "TheDeathOfPieceOfMind.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "SLEEP TOKEN - TAKE ME BACK TO EDEN",
+    "description": "Sleep Token album, year: 2023",
+    "price": 12,
+    "code": "19523",
+    "stock": 500,
+    "status": true,
+    "thumbnails": [
+      "TakeMeBackToEden.jpg",
+      "TakeMeBackToEden2.jpg"
+    ]
+  }
+]
