@@ -42,17 +42,77 @@ class cartManager {
         }
     }
     async removeProductFromCart(cartId, productId) {
-        try{
+        try {
             const cart = await cartModel.findById(cartId);
-            if(!cart) {
-    return null;
+            if (!cart) {
+                return null;
             }
-            cart.products = cart.products.filter(product => product.productId.toString() !==productId);
-        await cart.save();
+            cart.products = cart.products.filter(product => product.productId.toString() !== productId);
+            await cart.save();
 
-        return cart;
-        }catch(error){
+            return cart;
+        } catch (error) {
             console.error("Error removing product from cart", error);
+            throw new Error("Internal server error");
+        }
+    }
+    async updateCartWithProducts(cartId, productId) {
+        try {
+            constcart = await cartModel.findById(cartId);
+            if (!cart) {
+                return null;
+            }
+            cart.products = products
+            await cart.save();
+            return cart; 
+        } catch (error) {
+console.error("Error updating cart with products", error);
+throw new Error("Internal server error");
+        }
+    }
+    async updateProductQuantity(cartId, productId, quantity) {
+        try {
+            const cart = await cartModel.findById(cartId);
+            if (!cart) {
+                return null;
+            }
+
+            const product = cart.products.find(product => product.productId.toString() === productId);
+            if (!product) {
+                return null;
+            }
+
+            product.quantity = quantity;
+            await cart.save();
+
+            return cart;
+        } catch (error) {
+            console.error("Error updating product quantity", error);
+            throw new Error("Internal server error");
+        }
+    }
+    async clearCart(cartId) {
+        try {
+            const cart = await cartModel.findById(cartId);
+            if (!cart) {
+                return null;
+            }
+
+            cart.products = [];
+            await cart.save();
+
+            return cart;
+        } catch (error) {
+            console.error("Error clearing cart", error);
+            throw new Error("Internal server error");
+        }
+    }
+    async getCartWithProducts(cartId) {
+        try {
+            const cart = await cartModel.findById(cartId).populate('products.productId');
+            return cart;
+        } catch (error) {
+            console.error("Error getting cart with products", error);
             throw new Error("Internal server error");
         }
     }

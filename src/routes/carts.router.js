@@ -14,8 +14,9 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+//obtener carrito por ID
 router.get("/:cid", async (req, res) => {
-    const cartId = req.params.cid; 
+    const cartId = req.params.cid;
     try {
         const cart = await cartManager.getCartById(cartId);
         if (cart) {
@@ -28,7 +29,7 @@ router.get("/:cid", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-
+//Agregar producto al carrito
 router.post("/:cid/product/:pid", async (req, res) => {
     const cartId = req.params.cid;
     const productId = req.params.pid;
@@ -47,20 +48,36 @@ router.post("/:cid/product/:pid", async (req, res) => {
     }
 });
 //Eliminar producto seleccionado
-router.delete("/:cid/products/:pid", async(req, res) =>{
+router.delete("/:cid/products/:pid", async (req, res) => {
     const cartId = req.params.cid;
     const productId = req.params.pid;
-    
-    try{
+
+    try {
         const updatedCart = await cartManager.removeProductFromCart(cartId, productId);
-        if(updatedCart){
+        if (updatedCart) {
             res.json(updatedCart.products);
-        } else{
-            res.status(404).json({error: "Cart or product not found"});
+        } else {
+            res.status(404).json({ error: "Cart or product not found" });
         }
-    }catch (error){
+    } catch (error) {
         console.error("Error removing product from cart", error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+// Eliminar todos los productos del carrito
+router.delete("/:cid", async (req, res) => {
+    const cartId = req.params.cid;
+
+    try {
+        const updatedCart = await cartManager.clearCart(cartId);
+        if (updatedCart) {
+            res.json(updatedCart.products);
+        } else {
+            res.status(404).json({ error: "Cart not found" });
+        }
+    } catch (error) {
+        console.error("Error clearing cart", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 //Actualizar carrito con arreglo de productos
@@ -98,5 +115,21 @@ router.put("/:cid/products/:pid", async (req, res) => {
         console.error("Error updating product quantity", error);
         res.status(500).json({ error: "Internal server error" });
     }
+    // Obtener productos completos mediante populate
+    router.get("/:cid/products", async (req, res) => {
+        const cartId = req.params.cid;
+        try {
+            const cart = await cartManager.getCartWithProducts(cartId);
+            if (cart) {
+                res.json(cart.products);
+            } else {
+                res.status(404).json({ error: "Cart not found" });
+            }
+        } catch (error) {
+            console.error("Error getting cart with products", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    });
 });
+
 export default router;
