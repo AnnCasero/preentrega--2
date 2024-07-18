@@ -16,15 +16,15 @@ router.get("/", async (req, res) => {
         });
 res.json({
     status: 'success',
-    payload: productos,
-    totalPages: productos.totalPages,
-    prevPage: productos.prevPage,
-    nextPage: productos.nextPage,
-    page: productos.page,
-    hasPrevPage: productos.hasPrevPage,
-    hasNextPage: productos.hasNextPage,
-    prevLink: productos.hasPrevPage ? `/api/products?limit=${limit}&page=${productos.prevPage}&sort=${sort}&query=${query}` : null,
-    nextLink: productos.hasNextPage ? `/api/products?limit=${limit}&page=${productos.nextPage}&sort=${sort}&query=${query}` : null,
+    payload: products,
+    totalPages: products.totalPages,
+    prevPage: products.prevPage,
+    nextPage: products.nextPage,
+    page: products.page,
+    hasPrevPage: products.hasPrevPage,
+    hasNextPage: products.hasNextPage,
+    prevLink: products.hasPrevPage ? `/api/products?limit=${limit}&page=${productos.prevPage}&sort=${sort}&query=${query}` : null,
+    nextLink: products.hasNextPage ? `/api/products?limit=${limit}&page=${productos.nextPage}&sort=${sort}&query=${query}` : null,
 
 });
     } catch(error) {

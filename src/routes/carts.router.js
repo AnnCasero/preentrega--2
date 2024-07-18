@@ -14,6 +14,16 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+//obtener los carritos 
+router.get("/", async (req, res) => {
+    try {
+        const carts = await cartManager.getAllCarts();
+        res.status(200).json(carts);
+    } catch (error) {
+        console.error('Error al obtener los carritos', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
 //obtener carrito por ID
 router.get("/:cid", async (req, res) => {
     const cartId = req.params.cid;
